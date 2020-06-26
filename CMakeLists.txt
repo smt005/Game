@@ -13,5 +13,8 @@ FILE(GLOB_RECURSE SOURCES ${GAME_SOURCE}/*.cpp)
 # Расположение заголовочных файлов
 include_directories(${ENGINE_SOURCE})
 
+# ThirdPathy
+include_directories(${JSONCPP_INCLUDES})
+
 # Создание статической библиотеки
 add_library(${GAME_NAME} STATIC ${INCLUDES} ${SOURCES})
