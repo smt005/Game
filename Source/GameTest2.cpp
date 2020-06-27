@@ -4,12 +4,12 @@
 #include "json/json.h"
 #include "glm/vec3.hpp"
 
-#include "Game2.h"
+#include "GameTest2.h"
 #include "Engine.h"
 #include "FileManager.h"
 #include "Common/Help.h"
 
-void Game2::fun() {
+void GameTest2::fun() {
 	std::cout << "Game::fun()" << std::endl;
 
 	{
@@ -30,7 +30,7 @@ void Game2::fun() {
 	Engine::exeForGame();
 }
 
-bool Game2::loadJson(Json::Value& jsonValue, const std::string nameFile) {
+bool GameTest2::loadJson(Json::Value& jsonValue, const std::string nameFile) {
 	if (help::loadJson(nameFile, jsonValue)) {
 		help::log("Successfully, jsoin "+ nameFile +", is loaded");
 		return true;
@@ -41,6 +41,6 @@ bool Game2::loadJson(Json::Value& jsonValue, const std::string nameFile) {
 	}
 }
 
-void Game2::saveJson(const Json::Value& jsonValue, const std::string nameFile) {
+void GameTest2::saveJson(const Json::Value& jsonValue, const std::string nameFile) {
 	help::saveJson(nameFile, jsonValue);
 }

@@ -16,6 +16,7 @@ include_directories(${ENGINE_SOURCE})
 # ThirdPathy
 include_directories(${GLM_INCLUDES})
 include_directories(${JSONCPP_INCLUDES})
+include_directories(${GLFW_INCLUDES})
 
 # Создание статической библиотеки
 add_library(${GAME_NAME} STATIC ${INCLUDES} ${SOURCES})

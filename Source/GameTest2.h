@@ -3,7 +3,7 @@
 
 class Json::Value;
 
-class Game2 {
+class GameTest2 {
 public:
 	static void fun();
 

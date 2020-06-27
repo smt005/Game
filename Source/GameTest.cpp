@@ -3,15 +3,15 @@
 #include "json/json.h"
 #include "Common/Help.h"
 
-#include "Game.h"
-#include "Game2.h"
+#include "GameTest.h"
+#include "GameTest2.h"
 #include "Engine.h"
 #include "FileManager.h"
 
 void jsonFun(const std::string nameFile) {
 	Json::Value jsonValue;
 
-	Game2::loadJson(jsonValue, nameFile);
+	GameTest2::loadJson(jsonValue, nameFile);
 
 	if (!jsonValue.empty()) {
 		help::log("json [" + nameFile + "]:");
@@ -30,14 +30,14 @@ void jsonFun(const std::string nameFile) {
 			help::log("json [" + nameFile + "]: AFTER CHANGE");
 			help::log(help::stringFroJson(jsonValue));
 
-			Game2::saveJson(jsonValue, nameFile);
+			GameTest2::saveJson(jsonValue, nameFile);
 		}
 	}
 }
 
-void Game::exe() {
-	std::cout << "Game::exe()" << std::endl;
-	Game2::fun();
+void GameTest::exe() {
+	std::cout << "GameTest2::exe()" << std::endl;
+	GameTest2::fun();
 
 	Engine::FileManager::setResourcesDir("..\\..\\Source\\Resources");
 	jsonFun("Base/Setting_FAIL.json");
