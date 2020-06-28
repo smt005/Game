@@ -4,8 +4,8 @@
 #include "Game.h"
 #include <string>
 
-//namespace Engine { class Callback; }
-//class Map;
+namespace Engine { class Callback; }
+class Map;
 
 class MapExample final : public Engine::Game
 {
@@ -22,6 +22,6 @@ public:
 	void save();
 
 private:
-	//Engine::Callback* _callback = nullptr;
-	//Map* _mapGame = nullptr;
+	Engine::Callback* _callback = nullptr;
+	Map* _mapGame = nullptr;
 };

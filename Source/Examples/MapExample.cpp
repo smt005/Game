@@ -10,29 +10,28 @@
 
 #include "Core.h"
 #include "FileManager.h"
-//#include "Draw/Draw.h"
-//#include "Draw/DrawLine.h"
-//#include "Draw/Camera.h"
-//#include "Draw/Shader.h"
-//#include "Object/Mesh.h"
+#include "Draw/Draw.h"
+#include "Draw/DrawLine.h"
+#include "Draw/Camera.h"
+#include "Draw/Shader.h"
+#include "Object/Mesh.h"
 #include "Common/Help.h"
-//#include "Callback/Callback.h"
-//#include "Object/Object.h"
-//#include "Object/Map.h"
-//#include "Object/Line.h"
-//#include "Object/Triangle.h"
-//#include "Object/Color.h"
-//#include "Object/Identify.h"
-//#include "../Evolution/Microbe/Microbe.h"
+#include "Callback/Callback.h"
+#include "Object/Object.h"
+#include "Object/Map.h"
+#include "Object/Line.h"
+#include "Object/Triangle.h"
+#include "Object/Color.h"
+#include "Object/Identify.h"
 
 const std::string saveFileName("Saves/MapExampleSave.json");
 const std::string mapFileName("Examples/MapExample");
 
-//Greed greed(100.0f, 10.0f);
+Greed greed(100.0f, 10.0f);
 
 MapExample::~MapExample()
 {
-	/*if (!_callback) {
+	if (!_callback) {
 		delete _callback;
 		_callback = nullptr;
 	}
@@ -40,7 +39,7 @@ MapExample::~MapExample()
 	if (_mapGame) {
 		delete _mapGame;
 		_mapGame = nullptr;
-	}*/
+	}
 }
 
 void MapExample::init()
@@ -48,12 +47,12 @@ void MapExample::init()
 	Engine::FileManager::setResourcesDir("..\\..\\Source\\Resources");
 	if (!load())
 	{
-		//Camera::current.setFromEye(true);
-		//Camera::current.setPos(glm::vec3(0.0f, 0.0f, 0.0f));
-		//Camera::current.setDist(1.0f);
+		Camera::current.setFromEye(true);
+		Camera::current.setPos(glm::vec3(0.0f, 0.0f, 0.0f));
+		Camera::current.setDist(1.0f);
 	}
 
-	/*Draw::setClearColor(0.9f, 0.6f, 0.3f, 1.0f);
+	Draw::setClearColor(0.9f, 0.6f, 0.3f, 1.0f);
 
 	if (!_mapGame) {
 		_mapGame = new Map(mapFileName);
@@ -61,14 +60,12 @@ void MapExample::init()
 
 	greed.setPos({0.0f, 0.0f, 0.1f});
 	
-	microbe::Microbe::generateMicrobes();
-
-	initCallback();*/
+	initCallback();
 }
 
 void MapExample::initCallback()
 {
-	/*if (!_callback) {
+	if (!_callback) {
 		_callback = new Engine::Callback(Engine::CallbackType::PINCH_TAP, [](const Engine::CallbackEventPtr& callbackEventPtr) {
 			if (Engine::Callback::pressTap(Engine::VirtualTap::RIGHT)) {
 				Camera::current.rotate(Engine::Callback::deltaMousePos());
@@ -130,7 +127,7 @@ void MapExample::initCallback()
 				Camera::current.move(CAMERA_DOWN, speedCamera);
 			}
 		});
-	}*/
+	}
 }
 
 bool MapExample::load()
@@ -142,7 +139,7 @@ bool MapExample::load()
 
 	if (!saveData["camera"].empty()) {
 		Json::Value& cameraData = saveData["camera"];
-		//Camera::current.setJsonData(cameraData);
+		Camera::current.setJsonData(cameraData);
 	}
 
 #if _DEBUG
@@ -157,7 +154,7 @@ void MapExample::save()
 	Json::Value saveData;
 
 	Json::Value cameraData;
-	//Camera::current.getJsonData(cameraData);
+	Camera::current.getJsonData(cameraData);
 
 	saveData["camera"] = cameraData;
 	saveData["testKey"] = "testValue";
@@ -171,16 +168,14 @@ void MapExample::save()
 
 void MapExample::update()
 {
-	/*microbe::Microbe::updateMicrobes();
-
 	if (_mapGame) {
 		_mapGame->action();
-	}*/
+	}
 }
 
 void MapExample::draw()
 {
-	/*Draw::viewport();
+	Draw::viewport();
 	Draw::clearColor();
 
 	//	DrawLine
@@ -229,11 +224,4 @@ void MapExample::draw()
 	if (_mapGame) {
 		Draw::draw(*_mapGame);
 	}
-
-	for (auto& item : microbe::Microbe::getMicrobes()) {
-		if (item) {
-			const Triangle& shape = item->getSelf();
-			Draw::draw(shape);
-		}
-	}*/
 }
