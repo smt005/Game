@@ -7,7 +7,7 @@
 #include "glm/mat4x4.hpp"
 
 #include "MapExample.h"
-
+#include "Screen.h"
 #include "Core.h"
 #include "FileManager.h"
 #include "Draw/Draw.h"
@@ -23,6 +23,12 @@
 #include "Object/Triangle.h"
 #include "Object/Color.h"
 #include "Object/Identify.h"
+#include "UI/UIElement.h"
+#include "UI/UISample.h"
+#include "UI/UIScreen.h"
+
+//#include "Interface/Rect.h"
+//#include "UI/UIData.h"
 
 const std::string saveFileName("Saves/MapExampleSave.json");
 const std::string mapFileName("Examples/MapExample");
@@ -40,10 +46,18 @@ MapExample::~MapExample()
 		delete _mapGame;
 		_mapGame = nullptr;
 	}
+
+	/*if (_resizeEvent) {
+		delete _resizeEvent;
+	}*/
 }
 
 void MapExample::init()
 {
+	/*Engine::Resize* _resizeEvent = new Engine::Resize([this]() {
+		Camera::current.setPerspective(45.0f, Engine::Screen::aspect(), 0.1f, 1000.0f);
+		});*/
+
 	Engine::FileManager::setResourcesDir("..\\..\\Source\\Resources\\Files");
 	if (!load())
 	{
@@ -58,6 +72,70 @@ void MapExample::init()
 		_mapGame = new Map(mapFileName);
 	}
 
+	{
+		_elementPtr = UI::Element::make(glm::vec2(1.0f, 1.0f), "Test/strip_1.png", "Test");
+		_elementPtr->_triangles[0].setPos({ 0.125f, 0.0f, 1.0 });
+		//_elementPtr->_triangles[0].setRotate(1.57f, { 1.0f, 0.0f, 0.0f });
+		_elementPtr->_triangles[0].setRotate(0.785f, { 1.0f, 0.0f, 0.0f });
+		_elementPtr->add(Engine::CallbackType::RELEASE_TAP, [this](const Engine::CallbackEventPtr& callbackEventPtr) {
+			if (_elementPtr->hit()) {
+				help::log("Test ");
+			}
+		});
+	}
+
+	{
+		UI::Screen::init();
+	}
+
+	/*{
+		{
+			Rect* r = new Rect();
+			RectPtr rect(r);
+			rect->_triangle.setPos({ 2.0f, 0.0f, 1.0 });
+			_rects.push_back(rect);
+		}
+		{
+			Rect* r = new Rect(2);
+			RectPtr rect(r);
+			rect->_triangle.setPos({ 1.0f, 1.1f, 1.0 });
+			_rects.push_back(rect);
+		}
+		{
+			Rect* r = new Rect(3);
+			RectPtr rect(r);
+			rect->_triangle.setPos({ 0.0f, 2.2f, 1.0 });
+			_rects.push_back(rect);
+		}*/
+
+		/*{
+			Rect3* r = new Rect3();
+			Rect3Ptr rect(r);
+			rect->_triangles[0].setPos({ 0.0f, -1.0f, 1.0 });
+			rect->_triangles[1].setPos({ 0.0f, 0.0f, 1.0 });
+			rect->_triangles[2].setPos({ 0.0f, 1.0f, 1.0 });
+			_rect3s.push_back(rect);
+		}
+		{
+			Rect3Callback* r = new Rect3Callback();
+			r->add(Engine::CallbackType::RELEASE_TAP, [r](const Engine::CallbackEventPtr& callbackEventPtr) {
+				if (r->hint()) {
+					//Engine::Core::close();
+
+					UI::UIDataPtr dataPtr;
+					if (UI::UIData::load(dataPtr, "Test")) {
+						UI::UIData::save(dataPtr, "Temp/Test_save");
+					}
+				}
+			});
+			Rect3Ptr rect(r);
+			rect->_triangles[0].setPos({ 5.0f, -1.0f, 1.0 });
+			rect->_triangles[1].setPos({ 5.0f, 0.0f, 1.0 });
+			rect->_triangles[2].setPos({ 5.0f, 1.0f, 1.0 });
+			_rect3s.push_back(rect);
+		}
+	} */
+
 	greed.setPos({0.0f, 0.0f, 0.1f});
 	
 	initCallback();
@@ -65,6 +143,16 @@ void MapExample::init()
 
 void MapExample::initCallback()
 {
+	{
+		std::function<void()> fun = []() {};
+		const type_info& typeInfo = fun.target_type();
+		std::string nameFun = typeInfo.name();
+		help::log(nameFun);
+
+		//decltype(fun.target()) t = fun.target();
+	}
+
+
 	if (!_callback) {
 		_callback = new Engine::Callback(Engine::CallbackType::PINCH_TAP, [](const Engine::CallbackEventPtr& callbackEventPtr) {
 			if (Engine::Callback::pressTap(Engine::VirtualTap::RIGHT)) {
@@ -224,4 +312,34 @@ void MapExample::draw()
 	if (_mapGame) {
 		Draw::draw(*_mapGame);
 	}
+
+	// Draw interface
+
+	UI::Screen::prepare();
+	UI::Screen::draw();
+	// Interface
+
+	/*for (RectPtr& rect : _rects) {
+		Draw::draw(rect->_triangle);
+	}
+
+	for (Rect3Ptr& rect : _rect3s) {
+		Draw::draw(rect->_triangles[0]);
+		Draw::draw(rect->_triangles[1]);
+		Draw::draw(rect->_triangles[2]);
+	}*/
+
+
+	/*UI::Element* element = _elementPtr.get();
+	if (element) {
+		for (int i = 0; i < element->_count; ++i) {
+			const Triangle& trinagle = element->_triangles[i];
+			Draw::draw(trinagle);
+		}
+	}*/
+}
+
+void MapExample::resize()
+{
+	Camera::current.setPerspective(45.0f, Engine::Screen::aspect(), 0.1f, 1000.0f);
 }
