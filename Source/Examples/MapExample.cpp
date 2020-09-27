@@ -10,6 +10,7 @@
 
 #include "Core.h"
 #include "FileManager.h"
+#include "Screen.h"
 #include "Draw/Draw.h"
 #include "Draw/DrawLine.h"
 #include "Draw/Camera.h"
@@ -224,4 +225,9 @@ void MapExample::draw()
 	if (_mapGame) {
 		Draw::draw(*_mapGame);
 	}
+}
+
+void MapExample::resize()
+{
+	Camera::getCurrent().setPerspective(45.0f, Engine::Screen::aspect(), 0.1f, 1000.0f);
 }

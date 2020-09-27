@@ -16,6 +16,7 @@ public:
 	void init() override;
 	void update() override;
 	void draw() override;
+	void resize() override;
 
 	void initCallback();
 	bool load();
