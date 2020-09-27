@@ -4,15 +4,24 @@
 #include <memory>
 
 #include "Examples/MapExample.h"
+#include "Brain/Brain.h"
 
 namespace game
 {
+std::string currentGame = "Brain";
 
 Engine::GamePtr getGame(const std::string& name) {
 	Engine::Game* game = nullptr;
-	
-	if (name == "MapExample") {
+	std::string selectGame;
+
+	if (name.empty()) {
+		selectGame = currentGame;
+	}
+
+	if (selectGame == "MapExample") {
 		game = new MapExample();
+	} else if (selectGame == "Brain") {
+		game = new Brain();
 	}
 	else {
 		game = new Engine::DefaultGame();
