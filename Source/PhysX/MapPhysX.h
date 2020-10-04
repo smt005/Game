@@ -8,11 +8,11 @@ namespace Engine { class Callback; }
 class Map;
 class Greed;
 
-class MapExample final : public Engine::Game
+class MapPhysX final : public Engine::Game
 {
 public:
-	~MapExample();
-	std::string getName() override { return "MapExample"; }
+	~MapPhysX();
+	std::string getName() override { return "MapPhysX"; }
 
 	void init() override;
 	void update() override;
@@ -20,6 +20,7 @@ public:
 	void resize() override;
 
 	void initCallback();
+	void initPhysic();
 	bool load();
 	void save();
 
