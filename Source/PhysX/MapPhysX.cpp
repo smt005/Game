@@ -15,6 +15,7 @@
 #include "Draw/DrawLine.h"
 #include "Draw/Camera.h"
 #include "Draw/Shader.h"
+#include "Draw/Text.h"
 #include "Object/Mesh.h"
 #include "Common/Help.h"
 #include "Callback/Callback.h"
@@ -72,6 +73,8 @@ void MapPhysX::init()
 	_greed = new Greed(100.0f, 10.0f);
 	_greed->setPos({ 0.0f, 0.0f, 0.1f });
 	
+	_textFPS = new Engine::Text("FPS: ...", "Futured");
+
 	initCallback();
 	initPhysic();
 }

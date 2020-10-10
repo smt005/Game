@@ -4,7 +4,7 @@
 #include "Game.h"
 #include <string>
 
-namespace Engine { class Callback; }
+namespace Engine { class Callback; class Text; }
 class Map;
 class Greed;
 
@@ -26,6 +26,8 @@ public:
 
 private:
 	Engine::Callback* _callback = nullptr;
+	Engine::Text* _textFPS = nullptr;
 	Map* _mapGame = nullptr;
 	Greed* _greed = nullptr;
+
 };
