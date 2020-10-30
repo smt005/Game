@@ -13,6 +13,7 @@ class MapExample final : public Engine::Game
 public:
 	~MapExample();
 	std::string getName() override { return "MapExample"; }
+	std::filesystem::path getreSourcesDir() override { return "..\\..\\Source\\Resources\\Files"; }
 
 	void init() override;
 	void update() override;

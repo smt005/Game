@@ -48,7 +48,6 @@ MapExample::~MapExample()
 
 void MapExample::init()
 {
-	Engine::FileManager::setResourcesDir("..\\..\\Source\\Resources\\Files");
 	if (!load())
 	{
 		Camera::current.setFromEye(true);

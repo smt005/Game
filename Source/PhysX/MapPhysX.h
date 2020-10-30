@@ -13,6 +13,7 @@ class MapPhysX final : public Engine::Game
 public:
 	~MapPhysX();
 	std::string getName() override { return "MapPhysX"; }
+	std::filesystem::path getreSourcesDir() override { return "..\\..\\Source\\Resources\\Files"; }
 
 	void init() override;
 	void update() override;
@@ -23,6 +24,9 @@ public:
 	void initPhysic();
 	bool load();
 	void save();
+
+public:
+	static std::string _resourcesDir;
 
 private:
 	Engine::Callback* _callback = nullptr;
