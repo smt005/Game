@@ -5,10 +5,13 @@
 
 #include "Examples/MapExample.h"
 #include "PhysX/MapPhysX.h"
+#include "BrainGame/BrainGame.h"
 
 namespace game
 {
-	std::string currentGame = "MapPhysX";
+	//std::string currentGame = "MapExample";
+	//std::string currentGame = "MapPhysX";
+	std::string currentGame = "BrainGame";
 
 	Engine::GamePtr getGame(const std::string& name) {
 		Engine::Game* game = nullptr;
@@ -18,7 +21,10 @@ namespace game
 			selectGame = currentGame;
 		}
 
-		if (selectGame == "MapExample") {
+		if (selectGame == "BrainGame") {
+			game = new BrainGame();
+		}
+		else if (selectGame == "MapExample") {
 			game = new MapExample();
 		}
 		else if (selectGame == "MapPhysX") {
