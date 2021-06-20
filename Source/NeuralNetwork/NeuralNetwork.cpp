@@ -1,6 +1,6 @@
 
 #include "NeuralNetwork/NeuralNetwork.h"
-#include "nn2x2.h"
+#include "Samples/nn2x2.h"
 #include "Core.h"
 #include <iostream>
 
