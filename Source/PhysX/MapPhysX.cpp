@@ -150,7 +150,7 @@ void MapPhysX::initPhysic() {
 		return;
 	}
 
-	if (Engine::Physics::createScene()) {
+	if (!Engine::Physics::createScene()) {
 		return;
 	}
 

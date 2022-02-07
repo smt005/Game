@@ -13,8 +13,7 @@ class MapTemplate : public Engine::Game, public Engine::Callback
 public:
 	MapTemplate();
 	virtual ~MapTemplate();
-	virtual std::string getName() override { return "MapTemplate"; }
-	virtual std::filesystem::path getreSourcesDir() override { return "..\\..\\Source\\Resources\\Files"; }
+	virtual std::filesystem::path getSourcesDir() override { return "..\\..\\Source\\Resources\\Files"; }
 
 	virtual void init() override;
 	virtual void update() override;

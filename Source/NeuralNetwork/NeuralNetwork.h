@@ -8,7 +8,6 @@ class NeuralNetwork final : public MapTemplate
 {
 public:
 	NeuralNetwork();
-	std::string getName() override { return "NeuralNetwork"; }
 	void init() override;
 	void initCallback() override;
 	void update() override;
